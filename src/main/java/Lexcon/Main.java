@@ -1,17 +1,24 @@
 package Lexcon;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Customer customer = new Customer(1, "Anna", "anna@email.com");
+
+        Product p1 = new Product(1, "Notebook", 5.0);
+        Product p2 = new Product(2, "Pen", 2.0);
+        Product p3 = new Product(3, "Backpack", 30.0);
+
+        List<Product> products = new ArrayList<>();
+        products.add(p1);
+        products.add(p2);
+        products.add(p3);
+
+        Order order = new Order(1, customer, products);
+        order.calculateTotalPrice();
+        order.printSummary();
     }
 }
