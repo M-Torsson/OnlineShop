@@ -1,5 +1,7 @@
 package Lexcon;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -7,11 +9,21 @@ public class Order {
     private Customer customer;
     private List<Product> products;
     private double totalPrice;
+    private LocalDate orderDate;
 
-    public Order(int id, Customer customer, List<Product> products) {
+    public Order(int id, Customer customer) {
         this.id = id;
         this.customer = customer;
-        this.products = products;
+        this.products = new ArrayList<>();
+        this.orderDate = LocalDate.now();
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
     }
 
     public void calculateTotalPrice() {
@@ -26,16 +38,24 @@ public class Order {
         return totalPrice;
     }
 
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
     public void printSummary() {
         System.out.println("Order ID: " + id);
         System.out.println("Customer: " + customer.getName());
+        System.out.println("Order Date: " + orderDate);
 
         System.out.println("Products:");
         for (Product p : products) {
-            System.out.println("- " + p.getName() + " : " + p.getPrice());
+            System.out.printf("- %s | Category: %s | Price: %.2f SEK%n",
+                    p.getName(),
+                    p.getCategory(),
+                    p.getPrice());
         }
 
         System.out.println("Total Products: " + products.size());
-        System.out.println("Total Price: " + totalPrice);
+        System.out.printf("Total Price: SEK %.2f%n", totalPrice);
     }
 }
